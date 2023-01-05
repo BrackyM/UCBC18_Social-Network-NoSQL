@@ -13,7 +13,7 @@ const userSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            match: // figure out matching with regex email
+            match: [/.+@.+\..+/, 'Must be a valid email address!'] // Regex creates the ability to look for the pattern of an email address within the schema
         },
         thoughts: [
             {
