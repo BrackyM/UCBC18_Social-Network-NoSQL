@@ -5,7 +5,7 @@ const thoughtController ={
     createThought(req, res) {
         Thought.create(req.body)
             .then((databaseThoughtData) => {
-                return User.findOneUpdate(
+                return User.findOneAndUpdate(
                     { _id: req.body.userId },
                     { $push: { thoughts: databaseThoughtData._id }},
                     { new: true }
@@ -23,7 +23,7 @@ const thoughtController ={
     },
 
     updateThought(req, res) {
-        Thought.findOneUpdate({ _id: req.params.thoughtId }, { $set: req.body }, { runValidators: true, new: true })
+        Thought.findOneAndUpdate({ _id: req.params.thoughtId }, { $set: req.body }, { runValidators: true, new: true })
         .then((databaseThoughtData) => {
             if(!databaseThoughtData) {
                 return res.status(404).json({ message: 'no id associated with thought'});
@@ -36,13 +36,13 @@ const thoughtController ={
     },
 
     deleteThought(req, res) {
-        Thought.findOneRemove({ _id: req.params.thoughtId })
+        Thought.findOneAndRemove({ _id: req.params.thoughtId })
         .then((databaseThoughtData) => {
             if (!databaseThoughtData) {
                 return res.status(404).json({ message: 'no id associated with thought'});
             }
 
-            return User.findOneUpdate(
+            return User.findOneAndUpdate(
                 { thoughts: req.params.thougtId },
                 { $pull: { thoughts: req.params.thoughtId }},
                 { new: true }
@@ -84,7 +84,7 @@ const thoughtController ={
     },
 
     addReact(req, res) {
-        Thought.findOneUpdate(
+        Thought.findOneAndUpdate(
         {_id: req.params.thoughtId },
         { $addToSet: { reactions: req.body }},
         { runValidators: true, new: true }
@@ -101,7 +101,7 @@ const thoughtController ={
     },
 
     deleteReact(req, res) {
-        Thought.findOneUpdate(
+        Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
             { $pull: { reactions: { reactionId: req.params.reactionId }}},
             { runValidators: true, new: true }

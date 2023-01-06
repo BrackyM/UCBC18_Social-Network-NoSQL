@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(routes);
 
-database.once('open databse', () => {
+database.once('open', () => {
     app.listen(PORT, () => {
         console.log(`running on port ${PORT}`);
     });
