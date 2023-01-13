@@ -39,7 +39,7 @@ Use this project to learn more about the interaction of NoSQL, learning how to i
 ## Screenshots
 - Screenshot 1: Insomina endpoints setup
  
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](/assets/screenshot1.JPG)
 
  
 ## Deployment
